@@ -6,7 +6,8 @@ const createError = require('http-errors'),
 
  indexRouter = require('./routes/index'),
  usersRouter = require('./routes/users'),
- systemLogsRouter = require('./routes/system-logs/index')
+ catalogRouter = require('./routes/catalog/index')
+ //systemLogsRouter = require('./routes/system-logs/index')
 
  app = express();
 
@@ -23,7 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // use routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/logs', systemLogsRouter);
+app.use('/catalog', catalogRouter)
+//app.use('/logs', systemLogsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -19,17 +19,8 @@ class SystemLogs {
         return this.v3.get(`/store/systemlogs?severity=4&type=payment&limit=20&page=${this.state.next_page}`)
     }
 
-    getMeta() {
-        return (async () => {
-            const { meta } = await this.systemLogs();
-            this.meta = meta;
-            this.state.current_page = this.meta.pagination.current_page;
-            return meta;
-        })();
-    }
-
     async currentPage() {
-        const { pagination } = await this.getMeta();
+        const { meta } = await this.systemLogs();
         const { data } = await this.systemLogs()
 
         await data.map(x => {
@@ -40,17 +31,16 @@ class SystemLogs {
             }
         })
 
-        this.state.current_page = this.meta.pagination.current_page;
-        this.state.next_page = this.meta.pagination.current_page + 1;
+        this.state.current_page = meta.current_page;
+        this.state.next_page = meta.current_page + 1;
 
-        return this.state;
+        return this;
     }
 
     async getData() {
-        const $this = this;
       for (let index = 0; index < this.totalPages; index++) {
-        await $this.currentPage()
-        console.log("We're on:", $this.state.next_page);
+        await this.currentPage().
+        console.log("We're on:", this.state.current_page);
       }
     }
 

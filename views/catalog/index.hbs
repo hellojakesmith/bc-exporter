@@ -1,0 +1,28 @@
+<h1>{{title}}</h1>
+
+<body>
+    <div class="catalog-wrapper">
+        <table>
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Sku</th>
+                    <th scope="col">Inventory</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each items}}
+                <tr>
+                    <th scope="row">{{this.id}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.sku}}</td>
+                    <td>{{this.inventory}}</td>
+                    <td>{{this.price}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</body>
